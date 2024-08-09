@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crystal_test/controller/ui_controller.dart';
 import 'package:crystal_test/helper/helper.dart';
@@ -15,72 +17,82 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenMargin(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomeSpacer(
-          vertical: .03,
-        ),
-        Text(
-          'Welcome Anand Jain',
-          style: appTextstyle(fontWeight: FontWeight.w600, size: 22),
-        ),
-        Text(
-          'find your ride',
-          style: appTextstyle(
-              fontWeight: FontWeight.bold, size: 22, color: ColorResource.grey),
-        ),
-        CustomeSpacer(
-          vertical: .03,
-        ),
-        CarouselSlider.builder(
-          itemCount: UiController.slides.length,
-          itemBuilder: (context, index, realIndex) {
-            return Container(
-              width: Helper.w(context),
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Image.asset(fit: BoxFit.fill, UiController.slides[index]),
-            );
-          },
-          options: CarouselOptions(
-              aspectRatio: 2 / 1,
-              pageSnapping: false,
-              disableCenter: true,
-              clipBehavior: Clip.antiAlias,
-              autoPlay: true),
-        ),
-        CustomeSpacer(
-          vertical: .03,
-        ),
-        Text(
-          'Our Fleet',
-          style: appTextstyle(fontWeight: FontWeight.w600, size: 22),
-        ),
-        CustomeSpacer(
-          vertical: .02,
-        ),
-
-        // UiController.listViewItems.map((e) =>_listViewTile(context) ).toList()
-
-        // Expanded(
-        //   child: ListView.builder(
-        //     shrinkWrap: true,
-        //     physics: const NeverScrollableScrollPhysics(),
-        //     itemBuilder: (context, index) {
-        //       return Container();
-        //     },
-        //   ),
-        // )
-      ],
+        child: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomeSpacer(
+            vertical: .03,
+          ),
+          Text(
+            'Welcome Anand Jain',
+            style: appTextstyle(fontWeight: FontWeight.w600, size: 22),
+          ),
+          Text(
+            'find your ride',
+            style: appTextstyle(
+                fontWeight: FontWeight.bold,
+                size: 22,
+                color: ColorResource.grey),
+          ),
+          CustomeSpacer(
+            vertical: .03,
+          ),
+          AspectRatio(
+            aspectRatio: 2 / 1,
+            child: CarouselSlider.builder(
+              itemCount: UiController.slides.length,
+              itemBuilder: (context, index, realIndex) {
+                return Container(
+                  width: Helper.w(context),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child:
+                      Image.asset(fit: BoxFit.fill, UiController.slides[index]),
+                );
+              },
+              options: CarouselOptions(
+                  aspectRatio: 2 / 1,
+                  pageSnapping: false,
+                  disableCenter: true,
+                  clipBehavior: Clip.antiAlias,
+                  autoPlay: true),
+            ),
+          ),
+          CustomeSpacer(
+            vertical: .03,
+          ),
+          Text(
+            'Our Fleet',
+            style: appTextstyle(fontWeight: FontWeight.w600, size: 22),
+          ),
+          CustomeSpacer(
+            vertical: .02,
+          ),
+          SizedBox(
+            height:
+                Helper.h(context) * (UiController.listViewItems.length * .17),
+            child: ListView.builder(
+              itemCount: UiController.listViewItems.length,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return _listViewTile(
+                    context, UiController.listViewItems[index]);
+              },
+            ),
+          )
+        ],
+      ),
     ));
   }
 
-  Widget _listViewTile(BuildContext context) {
+  Widget _listViewTile(BuildContext context, Map<String, dynamic> data) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 20),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
           color: ColorResource.white,
@@ -99,7 +111,13 @@ class HomeScreen extends StatelessWidget {
           SizedBox(
             height: 120,
             width: 120,
-            child: Image.asset(fit: BoxFit.fill, Images.listOfImages[2]),
+            child: Image.asset(
+              data['image'],
+              fit: BoxFit.fill,
+            ),
+          ),
+          CustomeSpacer(
+            horizontal: .03,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -107,7 +125,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Electric 1 1',
+                data['title'],
                 style: appTextstyle(size: 18, fontWeight: FontWeight.w900),
               ),
               Text(
@@ -147,11 +165,11 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '₹ 500',
+                          '₹ ${data['start']}',
                           style: appTextstyle(fontWeight: FontWeight.w800),
                         ),
                         Text(
-                          '₹ 700',
+                          '₹ ${data['end']}',
                           style: appTextstyle(fontWeight: FontWeight.w800),
                         ),
                       ],

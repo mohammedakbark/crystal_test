@@ -1,6 +1,7 @@
 import 'package:crystal_test/controller/ui_controller.dart';
 import 'package:crystal_test/utils/colors.dart';
 import 'package:crystal_test/view/navigation_page.dart';
+import 'package:crystal_test/view/spalsh_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           ),
           useMaterial3: true,
         ),
-        home: NavigationPage(),
+        home: SplashPage(),
       ),
     );
   }

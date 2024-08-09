@@ -15,7 +15,7 @@ class UiController with ChangeNotifier {
     Images.homeSlide1,
   ];
 
- static  List<Map<String, dynamic>> listViewItems = [
+  static List<Map<String, dynamic>> listViewItems = [
     {
       'image': Images.listOfImages[0],
       'title': 'Electric 100 Neo',
@@ -24,7 +24,7 @@ class UiController with ChangeNotifier {
     },
     {
       'image': Images.listOfImages[1],
-      'title': 'Honda',
+      'title': 'Activa 4G',
       'start': '500',
       'end': '700'
     },
@@ -36,7 +36,7 @@ class UiController with ChangeNotifier {
     },
     {
       'image': Images.listOfImages[3],
-      'title': 'Scooty',
+      'title': 'Active 5G',
       'start': '500',
       'end': '1000'
     },

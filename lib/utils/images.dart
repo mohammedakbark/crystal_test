@@ -18,4 +18,5 @@ class Images {
 
   static const String accountIcon = 'assets/person.png';
   static const String drawerIcon = 'assets/drawer.png';
+  static const String logo = 'assets/logo.jpg';
 }

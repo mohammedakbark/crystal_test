@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ScreenMargin extends StatelessWidget {
   Widget child;
-   ScreenMargin({super.key,required this.child});
+  ScreenMargin({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

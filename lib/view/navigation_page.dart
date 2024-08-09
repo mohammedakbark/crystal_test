@@ -15,15 +15,16 @@ import 'package:provider/provider.dart';
 class NavigationPage extends StatelessWidget {
   NavigationPage({super.key});
   List<Widget> screens = [
-     HomeScreen(),
+    HomeScreen(),
     const SearchScreen(),
     const CartScreen(),
     const BookingScreen(),
-    const AccountScreen()
+    AccountScreen()
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: drawer(context),
         appBar: customeAppBar(),
         body: Consumer<UiController>(builder: (context, uiController, _) {
           return screens[uiController.currentIndex];

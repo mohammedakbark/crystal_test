@@ -4,19 +4,26 @@ import 'package:crystal_test/utils/const_var.dart';
 import 'package:crystal_test/utils/images.dart';
 import 'package:crystal_test/view/widgets/custome_button.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 PreferredSizeWidget customeAppBar() {
   return AppBar(
-    leading: IconButton(
-        onPressed: () {},
-        icon: Image.asset(
-          Images.drawerIcon,
-          scale: 25,
-        )),
+    leading: Builder(builder: (context) {
+      return IconButton(
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
+          icon: Image.asset(
+            Images.drawerIcon,
+            scale: 25,
+          ));
+    }),
     actions: [
       CustomeButton(
         bgColor: ColorResource.appThemeYello,
-        onPressed: () {},
+        onPressed: () async {
+          await launch('tel:+91 ${ConstVar.contactNumber}');
+        },
         radius: 30,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
